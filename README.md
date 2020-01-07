@@ -1,4 +1,4 @@
-# NCDC-weather-dataset-Hadoop-MapReduce-Pig-Hive
+# NCDC-weather-dataset
 
 This is an Hadoop Map/Reduce application for Working on weather data It reads the text input files, breaks each line into stations weather data and finds average for temperature , dew point , wind speed. The output is a locally sorted list of stations and its 12 attribute vector of average temperature , dew , wind speed of 4 sections for each month.
 
@@ -18,18 +18,3 @@ Executed the jar file: hadoop jar hadoop-project.jar MaxTemperature  /home/stude
 
 Copy the output file to local
 hdfs dfs -copyToLocal /home/student3/Project_output111/part-r-00000
-
-PIG Script
-
-Pig -x local
-grunt> records = LOAD '/home/student3/Project/Project_Output/output111.txt'
-AS (year:chararray, temperature:int);
-grunt> DUMP records;
-grunt> grouped_records = GROUP records BY year;
-grunt> DUMP grouped_records;
-grunt> max_temp = FOREACH grouped_records GENERATE group,
->> MAX(filtered_records.temperature);
-grunt> DUMP max_temp;
-grunt> min_temp = FOREACH grouped_records GENERATE group,
->>  MIN(records.temperature);
-grunt> DUMP min_temp;

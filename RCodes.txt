@@ -1,0 +1,15 @@
+d = read.table('max_temp.txt', header=F, sep=";", col.names=c("year", "temperature"))
+
+e = read.table('min_temp.txt', header=F, sep=";", col.names=c("year", "temperature"))
+
+scatter.smooth(x=d$year, y=d$temperature, main="temperature ~ year")
+
+broom::tidy(linearMod, conf.int = T)
+
+linearMod <- lm(temperature ~ year, data=d)
+
+predict(object = linearMod, newdata = subset(d, X >= 1930))
+
+linearMod1 <- lm(temperature ~ year, data=e)
+
+predict(object = linearMod1, newdata = subset(e, X >= 1930))
